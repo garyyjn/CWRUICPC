@@ -1,78 +1,35 @@
 /*
  * Kai Wang
  */
-
-package dRMmessage; // Delete this line when submit
-
+package gameOfThrones;  // Delete this line when submit
 import java.util.Scanner;
-
+	
 class Main {
-	
-	public static void main(String args[]) {
-		Main d = new Main();
-		for(String s : args)
-			System.out.println(d.decryption(s));
-		Scanner scanner = new Scanner(System.in);
-		while(scanner.hasNextLine())
-			System.out.println(d.decryption(scanner.nextLine()));
+			
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while(sc.hasNext()) {
+			int totalChild = sc.nextInt();
+			int numInput = sc.nextInt();
+			int[] eggPath = new int[numInput + 1];
+			int index = 0;
+			eggPath[0] = 0;
+			for(int i = 0; i < numInput; i ++) {
+				if(sc.hasNextInt()) {
+					int numThrow = sc.nextInt();
+					if(numThrow < 0)
+						eggPath[index + 1] = (totalChild + eggPath[index] - ((numThrow * -1) % totalChild)) % totalChild;
+					else
+						eggPath[index + 1] = (eggPath[index] + numThrow) % totalChild;
+					index ++;
+				}
+				else{
+					sc.next();
+					index =index - sc.nextInt();
+				}
+			} 
+			System.out.println(eggPath[index]);
+		}
+		sc.close();
 	}
-	
-	/*
-	 * Division Process
-	 */
-	public String[] divide(String input) {
-		String[] s = new String[2];
-		StringBuilder firstHalf = new StringBuilder();
-		StringBuilder secondHalf = new StringBuilder();
-		int i = 0;
-		while(i < input.length() / 2) {
-			firstHalf.append(input.charAt(i));
-			i ++;
-		}
-		while(i < input.length()) {
-			secondHalf.append(input.charAt(i));
-			i ++;
-		}
-		
-		s[0] = firstHalf.toString();
-		s[1] = secondHalf.toString();
-		return s;
-	}
-	
-	/*
-	 * Rotation Process
-	 */
-	public String rotate(String input, int rotValue) {
-		StringBuilder s = new StringBuilder();
-		for(int i = 0; i < input.length(); i ++) {
-			int newChar = input.charAt(i) + (rotValue % 26);
-			if(newChar > 90)
-				newChar = newChar % 90 + 64;
-			s.append((char)newChar);
-		}
-		return s.toString();
-	}
-	
-	/*
-	 * Decryption Process
-	 */
-	public String decryption(String input) {
-		String output = new String();
-		String[] s = divide(input);
-		int firstHalfRotValue = 0;
-		int secondHalfRotValue = 0;
-		for(int i = 0; i < input.length() / 2; i ++) {
-			firstHalfRotValue += s[0].charAt(i) - 65;
-			secondHalfRotValue += s[1].charAt(i) - 65;
-		}
-		s[0] = rotate(s[0], firstHalfRotValue);
-		s[1] = rotate(s[1], secondHalfRotValue);
-		for(int i = 0; i < input.length() / 2; i ++) {
-			output += rotate(Character.toString(s[0].charAt(i)), s[1].charAt(i) - 65);
-		}
-		
-		return output;
-	}
-	
-
 }
