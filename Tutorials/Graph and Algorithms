@@ -1,0 +1,30 @@
+Graph Tutorials 
+a) Ways to represent a graph:
+  1) Adjacency Matrix
+  2) Adjacency List
+b)BFS
+c)DFS
+d)Dijistra
+e)Minimum Spanning Tree
+f)Max Flow
+g)Min Cost Max Flow
+
+1) Adjacency Matrix
+public class AdjMatrix{
+        int[][] graph;
+        public AdjMatrix(int size){
+            graph = new int[size][size];
+        }
+        public void addEdge(int start, int dest){
+            graph[start][dest] = 1;
+            graph[dest][start] = 1;
+        }
+        public void addWeightedEdge(int start, int dest, int weight){
+            graph[start][dest] = weight;
+            graph[dest][start] = weight;
+        }
+        public boolean hasEdge(int start, int dest){
+            return(graph[start][dest]!=0);
+        }
+    }
+  
