@@ -1,0 +1,28 @@
+//input/output using Scanner and Printwriter
+import java.util.*;
+import java.io.*；
+public static void main(String[] args)throws FileNotFoundException, UnsupportedEncodingException {
+        //Input
+        
+        Scanner sc = new Scanner(new File("File Name/Path"));//to scan from file
+        
+        Scanner sc = new Scanner(System.in);//to scan from STD
+        
+        String line = sc.nextline();
+        String set[] = line.split("\\s");//multiple input per line
+        int singleint = Integer.parseint(line); //single int input
+        
+        
+        
+        //output
+        
+        PrintWriter pw = new PrintWriter("File Name", "UTF-8");//to print to file
+        
+        pw.println("BLABLABLA");
+        pw.close();
+        
+        System.out.println("Correct Answers");//to print to std
+        
+        }
+        
+        
